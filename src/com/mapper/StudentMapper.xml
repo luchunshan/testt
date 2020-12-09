@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace声明mapper对象映射路径 -->
+<mapper namespace="com.mapper.IStudentMapper">
+<insert id="save" parameterType="com.po.Student">
+ insert into student(sname,sex,address,birthday,classid,fname) values(#{sname},#{sex},#{address},#{birthday},#{classid},#{fname})
+</insert>
+<select id="findPageAll" parameterType="java.lang.Integer"  resultType="com.po.Student">
+select * from vwstu order by stuid limit ${(page-1)*rows},${rows}
+</select>
+<select id="doinit" resultType="com.po.Clazz">
+ select * from clazz
+</select>
+<select id="maxRows" resultType="Integer">
+select count(*) from student
+</select>
+<select id="findById" parameterType="Integer" resultType="com.po.Student">
+select * from student where stuid=${sid}
+</select>
+</mapper>
